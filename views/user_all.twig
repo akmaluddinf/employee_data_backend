@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <ul>
+        {% for user in users %}
+            <li>
+                {{ user.name }} |
+                <a href="/user/{{ user.id }}">Show</a>
+                <a href="/user/{{ user.id }}/delete">Delete</a>
+                <a href="/user/{{ user.id }}/update">Update</a>
+            </li>
+        {% endfor %}
+        </ul>
+        <a href="/user/new">Create New</a>
+    </body>
+</html>

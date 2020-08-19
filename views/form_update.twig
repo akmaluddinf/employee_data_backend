@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <form action="/user/{{ user.id }}/update" method="POST">
+            <input name="name" type="text" value="{{ user.name}}"/>
+            <Button type="submit">Update</Button>
+        </form>
+    </body>
+</html>
