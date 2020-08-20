@@ -18,7 +18,7 @@ app.get('/user/:id/delete', user.delete_id)
 app.get('/user/:id/update', user.form_update)
 app.post('/user/:id/update', user.update_by_id)
 app.get('/user/:id', user.by_id)
-app.get('/user', user.all)
+app.get('/user', user.get_all_user)
 
 app.listen(port, '0.0.0.0', ()=>{
 	console.log(`Example app listening at http://localhost:${port}`)
