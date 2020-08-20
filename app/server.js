@@ -3,9 +3,12 @@ const app = express()
 const port = 4000
 const user = require('../routes/user')
 const bodyParser = require('body-parser') 
+const cors = require('cors')
 
 app.set('view engine', 'twig')
 app.use(bodyParser.urlencoded({extended: true}))
+
+app.use(cors())
 
 app.get('/', (req,res)=>{
 	res.send('server')
