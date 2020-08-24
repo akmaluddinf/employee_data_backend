@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "employee_data",
+    "password": "employee_data",
+    "database": "employee_data",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "employee_data",
+    "password": "employee_data",
+    "database": "employee_data",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "employee_data",
+    "password": "employee_data",
+    "database": "employee_data",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}

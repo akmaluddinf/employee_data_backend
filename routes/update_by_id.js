@@ -1,4 +1,6 @@
-const User = require('../models/user')
+//const User = require('../models/user')
+const model = require('../models')
+const User = model.User
 
 const update_by_id = (req,res)=>{
     User.update(

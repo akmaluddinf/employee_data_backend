@@ -1,4 +1,6 @@
-const User = require('../models/user')
+//const User = require('../models/user')
+const model = require('../models')
+const User = model.User
 
 const by_id = (req,res)=>{
     User.findByPk(req.params.id).then(

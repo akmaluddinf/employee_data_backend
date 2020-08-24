@@ -1,5 +1,7 @@
-const User = require('../models/user')
+//const User = require('../models/user')
 const { Sequelize } = require('sequelize')
+const model = require('../models')
+const User = model.User
 
 const get_all_user = (req, res) => {
   User.findAll().then(
