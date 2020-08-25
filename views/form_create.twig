@@ -3,8 +3,9 @@
     <body>
         <form action="/user/new" method="POST">
             <label>Name:</label>
-            <input name="name" type="text" />
-            <Button type="submit">Submit</Button>
+            <input name="name" value="{{ oldValue.name }}" type="text" />
+            <p>{{ errorMessage.name }}</p>
+            <Button type="submit">Save</Button>
         </form>
     </body>
 </html>

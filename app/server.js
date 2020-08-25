@@ -4,7 +4,16 @@ const port = 4000
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const fileUpload = require('express-fileupload')
+
 const session = require('express-session')
+const sessionStore = require('express-session-sequelize')
+const SessionStore = sessionStore(session.Store)
+
+const db = require('../models')
+const sequelizeSessionStore = new SessionStore({
+  db: db.sequelize,
+})
+
 const user = require('../routes/user')
 const upload = require('../routes/upload')
 const postUpload = require('../routes/post_upload')
@@ -21,7 +30,8 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: 'auto' }
+  cookie: { secure: 'auto' },
+  store: sequelizeSessionStore
 }))
 
 app.get('/', (req,res)=>{
