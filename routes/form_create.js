@@ -6,8 +6,10 @@ const form_create = (req, res) => {
     errorMessage,
     oldValue
   }
+
   req.session.errorMessage = undefined
   req.session.oldValue = undefined
+
   res.render('form_create', data)
 }
 

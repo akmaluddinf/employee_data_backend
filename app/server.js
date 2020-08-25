@@ -8,6 +8,8 @@ const fileUpload = require('express-fileupload')
 const session = require('express-session')
 const sessionStore = require('express-session-sequelize')
 const SessionStore = sessionStore(session.Store)
+const passport = require('passport')
+const { Strategy } = require('passport-local')
 
 const db = require('../models')
 const sequelizeSessionStore = new SessionStore({
@@ -17,6 +19,7 @@ const sequelizeSessionStore = new SessionStore({
 const user = require('../routes/user')
 const upload = require('../routes/upload')
 const postUpload = require('../routes/post_upload')
+const login = require('../routes/login')
 
 app.set('view engine', 'twig')
 app.use(bodyParser.urlencoded({extended: true}))
@@ -48,6 +51,9 @@ app.get('/user/:id', user.by_id)
 app.get('/user', user.get_all_user)
 app.get('/upload', upload)
 app.post('/upload', postUpload)
+
+app.get('/login', login.get_login)
+app.post('/login', login.post_login)
 
 app.listen(port, '0.0.0.0', ()=>{
 	console.log(`Example app listening at http://localhost:${port}`)
