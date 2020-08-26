@@ -1,5 +1,6 @@
 //const User = require('../models/user')
 const model = require('../models')
+const bcrypt = require('bcrypt')
 const User = model.User
 
 function isAlphabetOnly(name){
@@ -21,7 +22,16 @@ function isAlphabetOnly(name){
 const post_data = async(req, res) => {
 
   if(isAlphabetOnly(`${req.body.name}`)){
-    const user = await User.create(req.body)
+    const data = req.body
+    data.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8))
+
+    // const data = {
+    //   name : req.body.name,
+    //   password : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8)),
+    //   email : req.body.email,
+    //   birth_date : req.body.birth_date
+    // }
+    const user = await User.create(data)
     res.redirect(`/user/${user.id}`)
   } else{
     req.session.errorMessage = {

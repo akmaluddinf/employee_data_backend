@@ -27,6 +27,14 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.STRING,
     allowNull:true
   },
+  email:{
+    type: DataTypes.STRING,
+    allowNull:true
+  },
+  birth_date:{
+    type: DataTypes.DATEONLY,
+    allowNull:true
+  },
   }, {
     sequelize,
     modelName: 'User',

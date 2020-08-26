@@ -10,6 +10,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.addColumn('user', 'password', {})
+    await queryInterface.removeColumn('user', 'password', {})
   }
 };
