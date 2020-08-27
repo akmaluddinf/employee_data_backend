@@ -24,7 +24,8 @@ const login = require('../routes/login')
 const hbs = require ('express-hbs')
 
 app.engine('hbs', hbs.express4({
-  partialsDir: __dirname + '/../views/partials'
+  partialsDir: __dirname + '/../views/partials',
+  defaultLayout: __dirname + '/../views/layout/default.hbs'
 }));
 app.set('views', __dirname + '/../views');
 app.set('view engine', 'hbs');
