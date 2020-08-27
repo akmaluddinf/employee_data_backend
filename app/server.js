@@ -21,7 +21,15 @@ const upload = require('../routes/upload')
 const postUpload = require('../routes/post_upload')
 const login = require('../routes/login')
 
-app.set('view engine', 'twig')
+const hbs = require ('express-hbs')
+
+app.engine('hbs', hbs.express4({
+  partialsDir: __dirname + '/../views/partials'
+}));
+app.set('views', __dirname + '/../views');
+app.set('view engine', 'hbs');
+
+//app.set('view engine', 'twig')
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.use(cors())
@@ -37,7 +45,7 @@ app.use(session({
 }))
 
 app.get('/', (req,res)=>{
-	res.send('server')
+	res.render('home')
 })
 
 const { validateNewUser } = require('./validateNewUser')
