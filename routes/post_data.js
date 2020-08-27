@@ -3,44 +3,50 @@ const model = require('../models')
 const bcrypt = require('bcrypt')
 const User = model.User
 
-function isAlphabetOnly(name){
-  const regex = /[a-z\s]/g;
-  const alphabetOnlyArray = name.match(regex);
-  const alphabetOnlyArrayCount = alphabetOnlyArray === null ? 0 : alphabetOnlyArray.length
-  const nameStringCount = name.length
-  return (nameStringCount === alphabetOnlyArrayCount)
-}
-
-// function required(name){
-//   if(name === undefined){
-//     return false;
-//   }else{
-//     return name.length < 1;
-//   }
-// }
-
 const post_data = async(req, res) => {
+  const Joi = require('joi-plus')
+  const { name, password, email, birth_date } = require('../validation')
+  const schema = Joi.object({ name, password, email, birth_date })
+  const options = {
+    abortEarly: false,
+    allowUnknown: false,
+    stripUnknown: false
+  }
+  const result = schema.validate(req.body, options)
+  const { error, value } = result
+  const keys = Object.keys(value)
+  const data = keys.map((key) => ({ name: key, value: value[key] }))
+  if(error){
+    error.details.forEach(valueWithError => {
+      const key = valueWithError.context.key
+      const errorMessage = valueWithError.message
+      const processedValue = valueWithError.context.value
+      const _value = error._original[key]
+      data.forEach((d, i) => {
+        if(d.name === key) {
+          data[i] = {
+            name: d.name,
+            value: processedValue,
+            error: errorMessage,
+            _value: _value
+          }
+        }
+      })
+    })
+  }
 
-  if(isAlphabetOnly(`${req.body.name}`)){
-    const data = req.body
-    data.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8))
+  const reduced = data.reduce((acc, cv, idx, arr) => {
+    acc[cv.name] = cv
+    return acc
+  }, {})
 
-    // const data = {
-    //   name : req.body.name,
-    //   password : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8)),
-    //   email : req.body.email,
-    //   birth_date : req.body.birth_date
-    // }
-    const user = await User.create(data)
-    res.redirect(`/user/${user.id}`)
-  } else{
-    req.session.errorMessage = {
-      name : 'harus alphabet atau spasi'
-    }
-    req.session.oldValue = {
-      name: req.body.name
-    }
-    res.redirect('/user/new')
+  if(error) {
+    req.session.data = reduced
+    req.session.save(
+      () => res.redirect('/user/new')
+    )
+  } else {
+    //res.redirect(`/user/${user.id}`)
   }
 }
 

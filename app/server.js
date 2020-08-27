@@ -26,7 +26,6 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 app.use(cors())
 app.use(fileUpload({ createParentPath: true}))
-
 app.use('/uploads', express.static('uploads'))
 
 app.use(session({
@@ -41,9 +40,11 @@ app.get('/', (req,res)=>{
 	res.send('server')
 })
 
+const { validateNewUser } = require('./validateNewUser')
+
 //app.get('/user_by_name/:name', user.by_name)
 app.get('/user/new', user.form_create)
-app.post('/user/new', user.post_data)
+app.post('/user/new', /* validateNewUser, */ user.post_data)
 app.get('/user/:id/delete', user.delete_id)
 app.get('/user/:id/update', user.form_update)
 app.post('/user/:id/update', user.update_by_id)
@@ -54,6 +55,10 @@ app.post('/upload', postUpload)
 
 app.get('/login', login.get_login)
 app.post('/login', login.post_login)
+
+const { validationErrorHandler } = require('./validationErrorHandler')
+app.use(validationErrorHandler)
+
 
 app.listen(port, '0.0.0.0', ()=>{
 	console.log(`Example app listening at http://localhost:${port}`)
