@@ -1,0 +1,15 @@
+{{!<./layout/default}}
+
+{{#contentFor 'body'}}
+    <ul>
+    {{#each users}}
+        <li>
+            {{ name }} |
+            <a href="/user/{{ id }}">Show</a>
+            <a href="/user/{{ id }}/delete">Delete</a>
+            <a href="/user/{{ id }}/update">Update</a>
+        </li>
+    {{/each}}
+    </ul>
+    <a href="/user/new">Create New</a>
+{{/contentFor}}

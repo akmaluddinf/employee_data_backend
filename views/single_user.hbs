@@ -1,0 +1,11 @@
+{{!<./layout/default}}
+
+{{#contentFor 'body'}}
+        <a href="/user">to user index</a> |
+        <a href="/user/{{ user.id }}/update">update</a>
+        <p>id: {{ user.id }}</p>
+        <p>name: {{ user.name }}</p>
+        <p>password: {{ user.password }}</p>
+        <p>email: {{ user.email }}</p>
+        <p>birthdate: {{ user.birth_date }}</p>
+{{/contentFor}}

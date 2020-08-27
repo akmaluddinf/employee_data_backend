@@ -1,0 +1,27 @@
+{{!<./layout/default}}
+
+{{#contentFor 'body'}}
+  <form action="/user/new" method="POST">
+      <label>Name:</label>
+      <input name="name" value="{{ data.name.value }}" type="text" /><br />
+        {{#if data.name.error }}
+          <p>{{ data.name.error }}</p>
+        {{/if}}
+      <label>Password:</label>
+      <input name="password" value="{{ data.password.value }}" type="password" /><br />
+        {{#if data.password.error }}
+          <p>{{ data.password.error }}</p>
+        {{/if}}
+      <label>Email:</label>
+      <input name="email" value="{{ data.email.value }}" type="text" /><br />
+        {{#if data.email.error }}
+          <p>{{ data.email.error }}</p>
+        {{/if}}
+      <label>Birth Date:</label>
+      <input name="birth_date" value="{{ data.birth_date.value }}" type="date" />
+        {{#if data.birth_date.error }}
+          <p>{{ data.birth_date.error }}</p>
+        {{/if}}
+      <Button type="submit">Save</Button>
+  </form>
+{{/contentFor}}

@@ -4,7 +4,10 @@ const model = require('../models')
 const User = model.User
 
 const get_all_user = (req, res) => {
-  User.findAll().then(
+  User.findAll({
+    raw: true,
+    nest: true
+  }).then(
     (users) => {
       //if(req.xhr){
       if (req.headers.accept === 'application/json') {

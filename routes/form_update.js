@@ -3,7 +3,7 @@ const model = require('../models')
 const User = model.User
 
 const form_update = (req, res) => {
-    User.findByPk(req.params.id).then(
+    User.findByPk(req.params.id, { raw: true, nest: true }).then(
         (user) => {
             res.render('form_update', { user })
         },

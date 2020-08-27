@@ -4,8 +4,9 @@ const postUpload = (req, res) => {
   file.mv("." + urlPath)
 
   req.session.uploadPath = urlPath
-
-  res.redirect(`/upload`)
+  req.session.save(
+    () => res.redirect(`/upload`)
+  )
 }
 
 module.exports = postUpload

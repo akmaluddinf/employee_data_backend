@@ -1,0 +1,13 @@
+{{!<./layout/default}}
+
+{{#contentFor 'body'}}
+  <form action="/login" method="POST">
+      <label>Name:</label>
+      <input name="username" type="text" />
+      <p>{{ errorMessage.name }}</p>
+      <label>Password:</label>
+      <input name="password" type="password" />
+      <p>{{ errorMessage.password }}</p>
+      <Button type="submit">Login</Button>
+  </form>
+{{/contentFor}}

@@ -1,0 +1,15 @@
+{{!<./layout/default}}
+
+{{#contentFor 'body'}}
+  <form action="/user/{{ user.id }}/update" method="POST">
+      <label>Name:</label>
+      <input name="name" type="text" value="{{ user.name }}"/><br />
+      <label>Password:</label>
+      <input name="password" type="text" value="{{ user.password }}"/><br />
+      <label>Email:</label>
+      <input name="email" type="text" value="{{ user.email }}"/><br />
+      <label>Birthdate:</label>
+      <input name="birth_date" type="date" value="{{ user.birth_date }}"/>
+      <Button type="submit">Update</Button>
+  </form>
+{{/contentFor}}
