@@ -49,6 +49,10 @@ app.get('/', (req,res)=>{
 	res.render('home')
 })
 
+app.get('/form', (req,res)=>{
+	res.render('form')
+})
+
 const { validateNewUser } = require('./validateNewUser')
 
 //app.get('/user_by_name/:name', user.by_name)
